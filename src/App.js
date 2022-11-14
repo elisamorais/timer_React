@@ -7,21 +7,21 @@ class App extends Component {
     super(props);
     this.state = {
       numero: 0,
-      botao: 'Vai'
+      botao: 'Start'
     };
     
     this.timer = null;
-    this.vai = this.vai.bind(this);
-    this.limpar = this.limpar.bind(this);
+    this.start = this.start.bind(this);
+    this.clean = this.clean.bind(this);
   }
 
-  vai() {
+  start() {
     let state = this.state;
 
     if(this.timer !== null) {
       clearInterval(this.timer);
       this.timer = null;
-      state.botao = 'Vai';
+      state.botao = 'Start';
 
     } else {
       this.timer = setInterval(()=>{
@@ -29,12 +29,12 @@ class App extends Component {
         state.numero += 0.1;
         this.setState(state)
       },100);
-      state.botao = 'Pausar';
+      state.botao = 'Pause';
     }
     this.setState(state);
   }
 
-  limpar() {
+  clean() {
     if(this.timer !== null) {
       clearInterval(this.timer);
       this.timer = null;
@@ -42,7 +42,7 @@ class App extends Component {
 
     let state = this.state;
     state.numero = 0;
-    state.botao = 'Vai';
+    state.botao = 'Start';
     this.setState(state);
   }
 
@@ -50,12 +50,12 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        <h1>Stopwatch</h1>
+        <h1>Stopwatch...</h1>
         <img src={require('./assets/cronometro.png')} className="img" />
         <a className="timer">{this.state.numero.toFixed(1)}</a>
         <div className="areaBtn">
-          <a className="botao" onClick={this.vai}>{this.state.botao}</a>
-          <a className="botao" onClick={this.limpar}>Limpar</a>
+          <a className="botao" onClick={this.start}>{this.state.botao}</a>
+          <a className="botao" onClick={this.clean}>Clean</a>
 
         </div>
       </div>
